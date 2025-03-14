@@ -1,3 +1,8 @@
+import math
+
+import calc
+
+
 def apply_attack_boost(raw, bonus_raw, ab_level):
     # raw: raw attack value
     # bonus_raw: bonus raw attack value (food, powercharm, etc.)
@@ -38,7 +43,16 @@ def calc_effective_crit_mod(crit_mod, affinity):
     effective_crit_mod = crit_dmg + norm_dmg
     return effective_crit_mod
 
+def calc_total_dmg(raw, bonus_raw, affinity, ab_level, cb_level):
+    # MH adds 0.1 to any damage value and then rounds it down, pushing 0.9 values up
+    total_raw = apply_attack_boost(raw, bonus_raw, ab_level)
+    crit_mod = apply_critical_boost(cb_level)
+    effective_crit_mod = calc_effective_crit_mod(crit_mod, affinity)
+    total_dmg = (total_raw * effective_crit_mod) + 0.1
+    return math.floor(total_dmg)
+
 if __name__ == "__main__":
     print(f'Total Raw Damage: {apply_attack_boost(100, 5, 5)}')
     print(f'Critical Modifier: {apply_critical_boost(5)}')
-    print(f'Effective crit modifier: {calc_effective_crit_mod(1.4, 20)}')
+    print(f'Effective crit modifier: {calc_effective_crit_mod(1.25, 0)}')
+    print(f'Total dmg: {calc_total_dmg(100, 3, 100, 5, 0)}')
