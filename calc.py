@@ -30,6 +30,7 @@ def apply_critical_boost(crit_boost_level):
 def calc_effective_crit_mod(crit_mod, affinity):
     # applies affinity chance to crit proc
     # prop_of_crit = % of chance to proc a crit
+    # prop_of_norm = % of chance of a normal hit
     prop_of_crit = affinity / 100
     prop_of_norm = 1 - prop_of_crit
     crit_dmg = prop_of_crit * crit_mod
