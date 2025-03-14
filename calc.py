@@ -53,9 +53,23 @@ def dmg_comparator(raw, bonus_raw, affinity, ab_level_a, cb_level_a, ab_level_b,
     comparator = damage_a, damage_b, damage_diff
     return comparator
 
+# If you want to test it yourself just replace the 'Comparison' numbers in the constructor below, ignore the rest
+# raw = weapon raw damage (without the bloat values, you dog)
+# bonus_raw = extra raw dmg from food, charms etc.
+# affinity = your weapon affinity (yes, it can be negative, although not optimal)
+# ab_level_a and b = Attack Boost level
+# cb_level_a and b = Critical Boost level
+
 if __name__ == "__main__":
-    print(f'Total Raw Damage: {apply_attack_boost(100, 5, 5)}')
-    print(f'Critical Modifier: {apply_critical_boost(5)}')
+    print(f'Total Raw Damage: {apply_attack_boost(100, 5, 0)}')
+    print(f'Critical Modifier: {apply_critical_boost(0)}')
     print(f'Effective crit modifier: {calc_effective_crit_mod(1.25, 0)}')
     print(f'Total dmg: {calc_total_dmg(100, 3, 20, 5, 3)}')
-    print(f'Comparison: {dmg_comparator(100, 3, 20, 5, 3, 3, 5)}')
+    print(f'Comparison: {dmg_comparator(raw = 100,
+                                        bonus_raw = 3,
+                                        affinity = 20,
+                                        ab_level_a = 5,
+                                        cb_level_a = 3,
+                                        ab_level_b = 3,
+                                        cb_level_b = 5
+                                        )}')
